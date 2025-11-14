@@ -29,7 +29,7 @@ export default function MontoPage({ params }: Props) {
           <div className="md:w-72 w-full space-y-4">
             <div className="p-6 rounded-md border border-slate-200">
               <p className="text-xl text-slate-700">Resumen</p>
-              <p className="text-4xl font-semibold mt-2">Q {val || 0}</p>
+              <p className="text-4xl font-semibold mt-2 text-slate-900">Q {val || 0}</p>
             </div>
             <Link href={`/fuel/${type}`} className="block text-center text-2xl px-6 py-4 rounded-md bg-slate-200 hover:bg-slate-300 text-slate-800">Atrás</Link>
             <Link href="/" className="block text-center text-2xl px-6 py-4 rounded-md bg-slate-200 hover:bg-slate-300 text-slate-800">Cancelar</Link>

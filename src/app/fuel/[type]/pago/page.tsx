@@ -13,6 +13,7 @@ export default function PagoPage({ params }: Props) {
   const value = search.get("value") || "0";
   const { type } = use(params);
   const label = type === "diesel" ? "Diésel" : type === "super" ? "Súper" : "Regular";
+  const isFull = mode === "full";
 
   return (
     <div className="min-h-screen w-full bg-white flex items-center justify-center">
@@ -32,8 +33,13 @@ export default function PagoPage({ params }: Props) {
             <ul className="text-lg text-slate-600">
               <li>Tipo: <span className="text-slate-900 font-medium">{label}</span></li>
               <li>Modo: <span className="text-slate-900 font-medium">{mode}</span></li>
-              <li>Valor: <span className="text-slate-900 font-medium">{mode === "monto" ? `Q${value}` : mode === "galonaje" ? `${value} gal` : "N/A"}</span></li>
+              <li>Valor: <span className="text-slate-900 font-medium">{isFull ? `Q1000 (preautorización)` : mode === "monto" ? `Q${value}` : mode === "galonaje" ? `${value} gal` : "N/A"}</span></li>
             </ul>
+            {isFull && (
+              <div className="text-sm text-slate-600 bg-amber-50 border border-amber-200 rounded-md p-3">
+                Se realizará un cargo de Q1000 como preautorización. El excedente será reembolsado en un máximo de 2 días hábiles.
+              </div>
+            )}
             <button
               className="w-full text-2xl py-4 rounded-md bg-emerald-700 hover:bg-emerald-600 text-white"
               onClick={() => router.push(`/fuel/${type}/llenando?mode=${encodeURIComponent(mode)}&value=${encodeURIComponent(value)}`)}

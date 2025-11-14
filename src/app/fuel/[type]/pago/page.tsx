@@ -14,6 +14,10 @@ export default function PagoPage({ params }: Props) {
   const { type } = use(params);
   const label = type === "diesel" ? "Diésel" : type === "super" ? "Súper" : "Regular";
   const isFull = mode === "full";
+  const isGalonaje = mode === "galonaje";
+  const PRICE_PER_GALLON_Q = 29; // referencia, puede ajustarse
+  const gallons = isGalonaje ? Math.max(0, Number(value) || 0) : 0;
+  const totalGalonajeQ = isGalonaje ? Math.round(gallons * PRICE_PER_GALLON_Q * 100) / 100 : 0;
 
   return (
     <div className="min-h-screen w-full bg-white flex items-center justify-center">
@@ -33,7 +37,15 @@ export default function PagoPage({ params }: Props) {
             <ul className="text-lg text-slate-600">
               <li>Tipo: <span className="text-slate-900 font-medium">{label}</span></li>
               <li>Modo: <span className="text-slate-900 font-medium">{mode}</span></li>
-              <li>Valor: <span className="text-slate-900 font-medium">{isFull ? `Q1000 (preautorización)` : mode === "monto" ? `Q${value}` : mode === "galonaje" ? `${value} gal` : "N/A"}</span></li>
+              {isGalonaje ? (
+                <>
+                  <li>Galones: <span className="text-slate-900 font-medium">{gallons} gal</span></li>
+                  <li>Precio por galón: <span className="text-slate-900 font-medium">Q {PRICE_PER_GALLON_Q.toFixed(2)}</span></li>
+                  <li>Total a pagar: <span className="text-slate-900 font-semibold">Q {totalGalonajeQ.toFixed(2)}</span></li>
+                </>
+              ) : (
+                <li>Valor: <span className="text-slate-900 font-medium">{isFull ? `Q1000 (preautorización)` : mode === "monto" ? `Q${value}` : "N/A"}</span></li>
+              )}
             </ul>
             {isFull && (
               <div className="text-sm text-slate-600 bg-amber-50 border border-amber-200 rounded-md p-3">
@@ -44,7 +56,7 @@ export default function PagoPage({ params }: Props) {
               className="w-full text-2xl py-4 rounded-md bg-emerald-700 hover:bg-emerald-600 text-white"
               onClick={() => router.push(`/fuel/${type}/llenando?mode=${encodeURIComponent(mode)}&value=${encodeURIComponent(value)}`)}
             >
-              Procesar pago
+              {isFull ? "Procesar preautorización Q1000" : isGalonaje ? `Pagar Q ${totalGalonajeQ.toFixed(2)}` : `Pagar Q ${Number(value || 0).toFixed(2)}`}
             </button>
             <div className="flex gap-3">
               <Link href={`/fuel/${type}`} className="flex-1 text-center text-xl px-6 py-3 rounded-md bg-slate-200 hover:bg-slate-300 text-slate-800">Atrás</Link>

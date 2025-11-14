@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { use, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function LlenandoPage({ params }: { params: { type: string } }) {
+export default function LlenandoPage({ params }: { params: Promise<{ type: string }> }) {
   const router = useRouter();
   const search = useSearchParams();
   const mode = search.get("mode") || "monto";
@@ -11,9 +11,10 @@ export default function LlenandoPage({ params }: { params: { type: string } }) {
 
   const [progress, setProgress] = useState(0);
 
+  const { type } = use(params);
   const label = useMemo(() => (
-    params.type === "diesel" ? "Diésel" : params.type === "super" ? "Súper" : "Regular"
-  ), [params.type]);
+    type === "diesel" ? "Diésel" : type === "super" ? "Súper" : "Regular"
+  ), [type]);
 
   useEffect(() => {
     const durationMs = 5000; // 5s mock
@@ -25,12 +26,12 @@ export default function LlenandoPage({ params }: { params: { type: string } }) {
       if (pct >= 100) {
         clearInterval(t);
         setTimeout(() => {
-          router.push(`/fuel/${params.type}/final?mode=${encodeURIComponent(mode)}&value=${encodeURIComponent(value)}`);
+          router.push(`/fuel/${type}/final?mode=${encodeURIComponent(mode)}&value=${encodeURIComponent(value)}`);
         }, 500);
       }
     }, 100);
     return () => clearInterval(t);
-  }, [mode, params.type, router, value]);
+  }, [mode, type, router, value]);
 
   return (
     <div className="min-h-screen w-full bg-white flex items-center justify-center">

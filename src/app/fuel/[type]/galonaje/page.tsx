@@ -32,7 +32,7 @@ export default function GalonajePage({ params }: Props) {
               <p className="text-4xl font-semibold mt-2">{val || 0} gal</p>
             </div>
             <Link href={`/fuel/${type}`} className="block text-center text-2xl px-6 py-4 rounded-md bg-slate-200 hover:bg-slate-300 text-slate-800">Atrás</Link>
-            <Link href="/" className="block text-center text-2xl px-6 py-4 rounded-md bg-slate-200 hover:bg-slate-300 text-slate-800">Inicio</Link>
+            <Link href="/" className="block text-center text-2xl px-6 py-4 rounded-md bg-slate-200 hover:bg-slate-300 text-slate-800">Cancelar</Link>
           </div>
         </div>
       </main>

@@ -1,9 +1,11 @@
 import Link from "next/link";
 
-export default function FinalPage({ params, searchParams }: { params: { type: string }, searchParams?: { [k: string]: string } }) {
-  const label = params.type === "diesel" ? "Diésel" : params.type === "super" ? "Súper" : "Regular";
-  const mode = searchParams?.mode || "monto";
-  const value = searchParams?.value || "0";
+export default async function FinalPage({ params, searchParams }: { params: Promise<{ type: string }>, searchParams: Promise<Record<string, string>> }) {
+  const { type } = await params;
+  const sp = await searchParams;
+  const label = type === "diesel" ? "Diésel" : type === "super" ? "Súper" : "Regular";
+  const mode = sp?.mode || "monto";
+  const value = sp?.value || "0";
 
   return (
     <div className="min-h-screen w-full bg-white flex items-center justify-center">
@@ -17,7 +19,7 @@ export default function FinalPage({ params, searchParams }: { params: { type: st
 
         <div className="flex justify-center gap-4">
           <Link href="/fuel" className="text-2xl px-6 py-3 rounded-md bg-slate-200 hover:bg-slate-300 text-slate-800">Nueva operación</Link>
-          <Link href="/" className="text-2xl px-6 py-3 rounded-md bg-slate-200 hover:bg-slate-300 text-slate-800">Inicio</Link>
+          <Link href="/" className="text-2xl px-6 py-3 rounded-md bg-slate-200 hover:bg-slate-300 text-slate-800">Cancelar</Link>
         </div>
       </main>
     </div>

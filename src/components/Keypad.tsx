@@ -44,7 +44,7 @@ export default function Keypad({ value, onChange, onSubmit }: Props) {
           {buttons.flat().map((b) => (
             <button
               key={b}
-              className="text-4xl md:text-5xl py-5 rounded-md bg-slate-100 hover:bg-slate-200 border border-slate-200"
+              className="text-4xl md:text-5xl py-5 rounded-md bg-slate-100 hover:bg-slate-200 border border-slate-200 text-black"
               onClick={() => handlePress(b)}
             >
               {b}

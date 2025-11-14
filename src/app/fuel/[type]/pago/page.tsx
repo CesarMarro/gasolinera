@@ -42,7 +42,7 @@ export default function PagoPage({ params }: Props) {
             </button>
             <div className="flex gap-3">
               <Link href={`/fuel/${type}`} className="flex-1 text-center text-xl px-6 py-3 rounded-md bg-slate-200 hover:bg-slate-300 text-slate-800">Atrás</Link>
-              <Link href="/" className="flex-1 text-center text-xl px-6 py-3 rounded-md bg-slate-200 hover:bg-slate-300 text-slate-800">Inicio</Link>
+              <Link href="/" className="flex-1 text-center text-xl px-6 py-3 rounded-md bg-slate-200 hover:bg-slate-300 text-slate-800">Cancelar</Link>
             </div>
           </div>
         </div>

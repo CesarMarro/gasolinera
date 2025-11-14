@@ -16,6 +16,12 @@ export default function LlenandoPage({ params }: { params: Promise<{ type: strin
     type === "diesel" ? "Diésel" : type === "super" ? "Súper" : "Regular"
   ), [type]);
 
+  const PRICE_PER_GALLON_Q = 29; // Referencia pública 2025
+  const isGalonaje = mode === "galonaje";
+  const targetGallons = isGalonaje ? Math.max(0, Number(value) || 0) : 0;
+  const currentGallons = isGalonaje ? Math.round((targetGallons * progress) / 100 * 1000) / 1000 : 0;
+  const currentCostQ = isGalonaje ? Math.round(currentGallons * PRICE_PER_GALLON_Q * 100) / 100 : 0;
+
   useEffect(() => {
     const durationMs = 5000; // 5s mock
     const start = Date.now();
@@ -45,6 +51,23 @@ export default function LlenandoPage({ params }: { params: Promise<{ type: strin
           </div>
           <div className="text-4xl text-center font-medium text-slate-900">{progress}%</div>
           <p className="text-center text-slate-500">Por favor, espere…</p>
+
+          {isGalonaje && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4">
+              <div className="p-4 border border-slate-200 rounded-md text-center">
+                <div className="text-sm text-slate-500">Precio por galón</div>
+                <div className="text-2xl font-semibold text-slate-900">Q {PRICE_PER_GALLON_Q.toFixed(2)}</div>
+              </div>
+              <div className="p-4 border border-slate-200 rounded-md text-center">
+                <div className="text-sm text-slate-500">Galones</div>
+                <div className="text-2xl font-semibold text-slate-900">{currentGallons.toFixed(3)}</div>
+              </div>
+              <div className="p-4 border border-slate-200 rounded-md text-center">
+                <div className="text-sm text-slate-500">Total (Q)</div>
+                <div className="text-2xl font-semibold text-slate-900">Q {currentCostQ.toFixed(2)}</div>
+              </div>
+            </div>
+          )}
         </div>
       </main>
     </div>

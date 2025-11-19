@@ -8,7 +8,7 @@ export default function Header() {
                 alt="Logo Secundario"
                 width={150}
                 height={75}
-                className="h-16 w-auto object-contain brightness-0 opacity-80"
+                className="h-12 md:h-16 w-auto object-contain brightness-0 opacity-80"
             />
         </header>
     );

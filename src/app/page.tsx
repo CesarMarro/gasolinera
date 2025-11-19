@@ -5,14 +5,14 @@ export default function Home() {
   return (
     <div className="min-h-screen w-full bg-gris-claro flex items-center justify-center">
       <main className="w-full max-w-4xl px-6 py-12 text-center">
-        <div className="flex justify-center items-center gap-8 mb-12">
+        <div className="flex justify-center items-center gap-4 md:gap-8 mb-8 md:mb-12">
           <Image
             src="/logo.png"
             alt="Logo Gasolinera"
             width={300}
             height={150}
             priority
-            className="h-auto w-auto max-h-48 object-contain"
+            className="h-auto w-auto max-h-32 md:max-h-48 object-contain"
           />
           <Image
             src="/logo2.png"
@@ -20,7 +20,7 @@ export default function Home() {
             width={300}
             height={150}
             priority
-            className="h-auto w-auto max-h-48 object-contain brightness-0 opacity-80"
+            className="h-auto w-auto max-h-32 md:max-h-48 object-contain brightness-0 opacity-80"
           />
         </div>
         <h1 className="text-5xl md:text-6xl font-bold text-vino mb-4">

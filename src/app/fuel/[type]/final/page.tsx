@@ -24,7 +24,7 @@ export default async function FinalPage({ params, searchParams }: { params: Prom
             alt="Logo Secundario"
             width={200}
             height={100}
-            className="h-auto w-auto max-h-32 object-contain brightness-0 opacity-80"
+            className="h-auto w-auto max-h-24 md:max-h-32 object-contain brightness-0 opacity-80"
           />
         </div>
         <h1 className="text-4xl md:text-5xl font-semibold text-vino mb-4">Operación completada</h1>

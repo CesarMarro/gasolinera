@@ -13,7 +13,7 @@ export default function FuelSelection() {
             alt="Logo Gasolinera"
             width={250}
             height={125}
-            className="h-auto w-auto max-h-32 object-contain"
+            className="h-auto w-auto max-h-24 md:max-h-32 object-contain"
           />
         </div>
         <h1 className="text-4xl md:text-5xl font-semibold text-vino mb-8">

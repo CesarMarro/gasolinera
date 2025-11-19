@@ -1,19 +1,38 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="min-h-screen w-full bg-gradient-to-b from-sky-50 to-white flex items-center justify-center">
+    <div className="min-h-screen w-full bg-gris-claro flex items-center justify-center">
       <main className="w-full max-w-4xl px-6 py-12 text-center">
-        <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-4">
+        <div className="flex justify-center items-center gap-8 mb-12">
+          <Image
+            src="/logo.png"
+            alt="Logo Gasolinera"
+            width={300}
+            height={150}
+            priority
+            className="h-auto w-auto max-h-48 object-contain"
+          />
+          <Image
+            src="/logo2.png"
+            alt="Logo Secundario"
+            width={300}
+            height={150}
+            priority
+            className="h-auto w-auto max-h-48 object-contain brightness-0 opacity-80"
+          />
+        </div>
+        <h1 className="text-5xl md:text-6xl font-bold text-vino mb-4">
           Bienvenido
         </h1>
-        <p className="text-2xl md:text-3xl text-slate-600 mb-12">
+        <p className="text-2xl md:text-3xl text-vino/80 mb-12">
           Autoservicio - Gasolinera
         </p>
         <div className="flex items-center justify-center">
           <Link
             href="/fuel"
-            className="block w-full max-w-md text-3xl md:text-4xl font-semibold bg-green-700 hover:bg-green-600 text-white rounded-md py-8 px-6 shadow-sm transition-colors"
+            className="block w-full max-w-md text-3xl md:text-4xl font-semibold bg-rojo-fuerte hover:bg-rojo-oscuro text-white rounded-md py-8 px-6 shadow-sm transition-colors"
           >
             Comenzar
           </Link>

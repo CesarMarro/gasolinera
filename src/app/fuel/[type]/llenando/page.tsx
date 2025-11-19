@@ -1,22 +1,21 @@
 "use client";
 
-import { use, useEffect, useMemo, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
+import Header from "@/components/Header";
 
 export default function LlenandoPage({ params }: { params: Promise<{ type: string }> }) {
   const router = useRouter();
   const search = useSearchParams();
   const mode = search.get("mode") || "monto";
   const value = search.get("value") || "0";
+  const { type } = use(params);
 
   const [progress, setProgress] = useState(0);
 
-  const { type } = use(params);
-  const label = useMemo(() => (
-    type === "diesel" ? "Diésel" : type === "super" ? "Súper" : "Regular"
-  ), [type]);
-
-  const PRICE_PER_GALLON_Q = 29; // Referencia pública 2025
+  const label = type === "diesel" ? "Diésel" : type === "super" ? "Súper" : "Regular";
+  const PRICE_PER_GALLON_Q = 29;
   const isGalonaje = mode === "galonaje";
   const targetGallons = isGalonaje ? Math.max(0, Number(value) || 0) : 0;
   const currentGallons = isGalonaje ? Math.round((targetGallons * progress) / 100 * 1000) / 1000 : 0;
@@ -40,31 +39,32 @@ export default function LlenandoPage({ params }: { params: Promise<{ type: strin
   }, [mode, type, router, value]);
 
   return (
-    <div className="min-h-screen w-full bg-white flex items-center justify-center">
-      <main className="w-full max-w-3xl px-6 py-12">
-        <h1 className="text-4xl md:text-5xl font-semibold text-slate-900 mb-2 text-center">Llenando…</h1>
-        <p className="text-center text-slate-600 mb-8 text-xl">{label} · {mode === "full" ? "Servicio Full" : mode === "monto" ? `Monto Q${value}` : `Galonaje ${value} gal`}</p>
+    <div className="min-h-screen w-full bg-gris-claro flex flex-col items-center justify-center relative">
+      <Header />
+      <main className="w-full max-w-3xl px-6 py-12 text-center mt-16">
+        <h1 className="text-4xl md:text-5xl font-semibold text-vino mb-2 text-center">Llenando…</h1>
+        <p className="text-center text-vino/80 mb-8 text-xl">{label} · {mode === "full" ? "Servicio Full" : mode === "monto" ? `Monto Q${value}` : `Galonaje ${value} gal`}</p>
 
         <div className="space-y-4">
-          <div className="h-6 w-full bg-slate-200 rounded-sm">
-            <div className="h-6 bg-emerald-700 rounded-sm transition-all" style={{ width: `${progress}%` }} />
+          <div className="h-6 w-full bg-white border border-gris-medio rounded-sm">
+            <div className="h-full bg-rojo-fuerte rounded-sm transition-all animate-fill-progress" style={{ width: `${progress}%` }} />
           </div>
-          <div className="text-4xl text-center font-medium text-slate-900">{progress}%</div>
-          <p className="text-center text-slate-500">Por favor, espere…</p>
+          <div className="text-4xl text-center font-medium text-vino">{progress}%</div>
+          <p className="text-center text-vino/60">Por favor, espere…</p>
 
           {isGalonaje && (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4">
-              <div className="p-4 border border-slate-200 rounded-md text-center">
-                <div className="text-sm text-slate-500">Precio por galón</div>
-                <div className="text-2xl font-semibold text-slate-900">Q {PRICE_PER_GALLON_Q.toFixed(2)}</div>
+              <div className="p-4 border border-gris-medio rounded-md text-center bg-white">
+                <div className="text-sm text-vino/60">Precio por galón</div>
+                <div className="text-2xl font-semibold text-vino">Q {PRICE_PER_GALLON_Q.toFixed(2)}</div>
               </div>
-              <div className="p-4 border border-slate-200 rounded-md text-center">
-                <div className="text-sm text-slate-500">Galones</div>
-                <div className="text-2xl font-semibold text-slate-900">{currentGallons.toFixed(3)}</div>
+              <div className="p-4 border border-gris-medio rounded-md text-center bg-white">
+                <div className="text-sm text-vino/60">Galones</div>
+                <div className="text-2xl font-semibold text-vino">{currentGallons.toFixed(3)}</div>
               </div>
-              <div className="p-4 border border-slate-200 rounded-md text-center">
-                <div className="text-sm text-slate-500">Total (Q)</div>
-                <div className="text-2xl font-semibold text-slate-900">Q {currentCostQ.toFixed(2)}</div>
+              <div className="p-4 border border-gris-medio rounded-md text-center bg-white">
+                <div className="text-sm text-vino/60">Total (Q)</div>
+                <div className="text-2xl font-semibold text-vino">Q {currentCostQ.toFixed(2)}</div>
               </div>
             </div>
           )}

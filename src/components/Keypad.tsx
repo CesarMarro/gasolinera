@@ -36,7 +36,7 @@ export default function Keypad({ value, onChange, onSubmit }: Props) {
     <div className="flex gap-6 w-full">
       <div className="flex-1">
         <input
-          className="w-full text-4xl md:text-5xl p-4 rounded-md border border-slate-300 text-right text-black"
+          className="w-full text-4xl md:text-5xl p-4 rounded-md border border-gris-medio text-right text-vino bg-white"
           value={value}
           readOnly
         />
@@ -44,20 +44,20 @@ export default function Keypad({ value, onChange, onSubmit }: Props) {
           {buttons.flat().map((b) => (
             <button
               key={b}
-              className="text-3xl md:text-4xl py-4 rounded-md bg-slate-100 hover:bg-slate-200 border border-slate-200 text-black"
+              className="text-3xl md:text-4xl py-4 rounded-md bg-white hover:bg-gris-claro border border-gris-medio text-vino"
               onClick={() => handlePress(b)}
             >
               {b}
             </button>
           ))}
           <button
-            className="col-span-3 text-2xl md:text-3xl py-4 rounded-md bg-white hover:bg-slate-50 border border-slate-300 text-slate-700"
+            className="col-span-3 text-2xl md:text-3xl py-4 rounded-md bg-white hover:bg-gris-claro border border-gris-medio text-vino"
             onClick={() => onChange("")}
           >
             Borrar
           </button>
           <button
-            className="col-span-3 text-2xl md:text-3xl py-4 rounded-md bg-emerald-700 hover:bg-emerald-600 text-white"
+            className="col-span-3 text-2xl md:text-3xl py-4 rounded-md bg-rojo-fuerte hover:bg-rojo-oscuro text-white"
             onClick={onSubmit}
           >
             OK
